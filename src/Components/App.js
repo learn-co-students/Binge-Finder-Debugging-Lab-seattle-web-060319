@@ -24,12 +24,12 @@ class App extends Component {
     window.scrollTo(0, 0)
   }
 
-  handleSearch (e){
+  handleSearch = (e) => {
     this.setState({ searchTerm: e.target.value.toLowerCase() })
   }
 
   handleFilter = (e) => {
-    e.target.value === "No Filter" ? this.setState({ filterRating:"" }) : this.setState({ filterRating: e.target.value})
+    e.target.value === "No Filter" ? this.setState({ filterRating:"" }) : this.setState({ filterByRating: e.target.value})
   }
 
   selectShow = (show) => {
@@ -41,9 +41,11 @@ class App extends Component {
   }
 
   displayShows = () => {
+    // console.log(this.state.filterByRating)
     if (this.state.filterByRating){
       return this.state.shows.filter((s)=> {
-        return s.rating.average >= this.state.filterByRating
+        // console.log(s.rating.average, this.state.filterByRating)
+        return s.rating.average >= Number(this.state.filterByRating);
       })
     } else {
       return this.state.shows
